@@ -9,22 +9,33 @@ userRepos.style.display = 'none';
 
 const http = new HTTPLibrary();
 
-const displayUser = new DisplayUser();
+const ui = new UI();
 
 userInput.addEventListener('keyup', (e) => {
     const userText = e.target.value;
     if (userText != '') {
         http.get(userText)
+        .then(handleErrors)
         .then(data => {
-            displayUser.display(data)
-            userProfile.style.display = 'flex';
-            title.style.display = 'inline-block';
-            userRepos.style.display = 'inline-block';
+            if(data.profile.message === 'Not Found') {
+                ui.notFoundError('User not found...');
+                ui.clear();
+            } else {
+                ui.displayUser(data.profile);
+                ui.displayRepos(data.repos);
+            }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+        });
     } else {
-        userProfile.style.display = 'none';
-        title.style.display = 'none';
-        userRepos.style.display = 'none';
+        ui.clear();
     }
 })
+
+function handleErrors(res) {
+    if (res.mesage === 'Not Found') {
+        throw new Error(res.message);
+    }
+    return res;
+}

@@ -20,6 +20,16 @@ img {
   width: 100%;
   margin: 12px; }
 
+.alert {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  font-weight: 200;
+  text-align: center;
+  color: #fff;
+  background: gold;
+  border-radius: 8px; }
+
 body {
   color: #4B4B4B;
   font-family: Arial, Helvetica, sans-serif; }
@@ -38,6 +48,8 @@ body {
     margin: 0 auto; }
     body #container #search > * {
       margin-bottom: 15px; }
+    body #container #search h1 {
+      display: inline-block; }
     body #container #search #user-name {
       padding: 8px;
       border-radius: 4px;
@@ -81,7 +93,7 @@ body {
           list-style: none;
           margin: 0;
           width: 90%; }
-    body #container h1 {
+    body #container #latest-repos-title {
       display: none;
       margin-top: 30px; }
     body #container #user-repos {
